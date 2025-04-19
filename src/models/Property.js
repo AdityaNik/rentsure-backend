@@ -2,59 +2,56 @@ import mongoose from "mongoose";
 
 const propertySchema = new mongoose.Schema(
   {
-    // Core property information
-    propertyHash: String,
-    landlordId: String,
-    landlord: String,
-    
-    // Property details
-    propertyType: String,
-    bhkType: String,
-    furnishingStatus: String,
+    propertyHash: { type: String, required: false },
+    landlordId: { type: String, required: false },
+    landlord: { type: String, required: false },
+
+    propertyType: { type: String, required: false },
+    bhkType: { type: String, required: false },
+    furnishingStatus: { type: String, required: false },
     address: {
-      fullAddress: String,
-      locality: String,
-      landmark: String,
-      city: String,
-      pincode: String
+      fullAddress: { type: String, required: false },
+      locality: { type: String, required: false },
+      landmark: { type: String, required: false },
+      city: { type: String, required: false },
+      pincode: { type: String, required: false }
     },
-    
-    // Rent details
-    monthlyRent: Number,
-    rentAmountInFiat: Number,     // Renamed for consistency with form
-    rentAmountInCrypto: Number,   // Changed to Number
-    preferredPaymentMode: {       // New field as requested
+
+    monthlyRent: { type: Number, required: false },
+    rentAmountInFiat: { type: Number, required: false },
+    rentAmountInCrypto: { type: Number, required: false },
+    preferredPaymentMode: {
       type: String,
       enum: ["fiat", "crypto", "both"],
-      default: "fiat"
+      default: "fiat",
+      required: false
     },
-    securityDeposit: Number,
-    maintenanceCharges: String,   // 'included', 'separate', 'none'
-    maintenanceAmount: Number,
+    securityDeposit: { type: Number, required: false },
+    maintenanceCharges: { type: String, required: false },
+    maintenanceAmount: { type: Number, required: false },
     rentDueDay: {
       type: Number,
-      default: 1
+      default: 1,
+      required: false
     },
-    
-    // Lease and availability
-    leaseDuration: String,        // Changed to String to match form ('6months', '11months', etc.)
-    availability: String,
-    
-    // Tenant preferences
-    preferredTenants: String,
-    petsAllowed: String,
-    additionalTerms: String,
-    
-    // Property status
+
+    leaseDuration: { type: String, required: false },
+    availability: { type: String, required: false },
+
+    preferredTenants: { type: String, required: false },
+    petsAllowed: { type: String, required: false },
+    additionalTerms: { type: String, required: false },
+
     active: {
       type: Boolean,
-      default: true
+      default: true,
+      required: false
     },
-    
-    // Media
-    propertyImages: [String]
+
+    propertyImages: { type: [String], required: false }
   },
   { timestamps: true }
 );
+
 
 export default mongoose.model("Property", propertySchema);

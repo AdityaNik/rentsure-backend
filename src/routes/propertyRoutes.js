@@ -9,12 +9,13 @@ router.post("/", async (req, res) => {
   try {
     // Get property data directly from request body
     const propertyData = req.body;
+    console.log("Property Data:", propertyData.propertyData);
     
     // Initialize empty property images array
     propertyData.propertyImages = [];
     
     // Create new property
-    const property = new Property(propertyData);
+    const property = new Property(propertyData.propertyData);
     await property.save();
     
     res.status(201).json({
