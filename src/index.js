@@ -1,22 +1,41 @@
-import express from 'express'
-import cors from 'cors'
-import mongoose from 'mongoose';
-import propertyRoute from './propertyRoute.js';
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+// Import routes
+import propertyRoutes from "./routes/propertyRoutes.js";
+import rentalAgreementRoutes from "./routes/rentalAgreementRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
+
+dotenv.config();
 
 const app = express();
 
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
 
-mongoose.connect('mongodb+srv://adityanikam481:YQb7ocD461hqbMUt@cluster0.6clgv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { dbName: 'restsureDB' })
+mongoose
+  .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/rentsure")
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
-app.get('/propertyRoute', propertyRoute);
+// Routes
+app.use("/api/properties", propertyRoutes);
+app.use("/api/rental-agreements", rentalAgreementRoutes);
+app.use("/api/payments", paymentRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Hello....!");
+});
 
-app.get('/', (req, res) => {
-    res.send('Hello....!');
-})
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Something went wrong!" });
+});
 
-app.listen(3000, () => {
-    console.log('backend stated on PORT 3000');
-})
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
