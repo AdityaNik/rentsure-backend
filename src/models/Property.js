@@ -74,7 +74,8 @@ const propertySchema = new mongoose.Schema(
       required: false
     },
 
-    propertyImages: { type: [String], required: false }
+    propertyImages: { type: [String], required: false },
+    interestedUsers: { type: [String], required: false },
   },
   { timestamps: true }
 );
