@@ -4,6 +4,7 @@ const rentalAgreementSchema = new mongoose.Schema(
   {
     propertyId: String, // Store property ID as string instead of reference
     landlordId: String, // Reference to landlord
+    tenantId: String, // Reference to tenant
     tenantAddress: String,
     agreementStartDate: Date,
     agreementEndDate: Date,

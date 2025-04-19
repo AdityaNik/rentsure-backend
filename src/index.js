@@ -8,6 +8,7 @@ import propertyRoutes from "./routes/propertyRoutes.js";
 import rentalAgreementRoutes from "./routes/rentalAgreementRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import landlordRoutes from "./routes/landlordRoutes.js";
+import tenantRoutes from "./routes/tenantRoutes.js";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use("/api/properties", propertyRoutes);
 app.use("/api/rental-agreements", rentalAgreementRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/landlords", landlordRoutes);
+app.use("/api/tenants", tenantRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello....!");
