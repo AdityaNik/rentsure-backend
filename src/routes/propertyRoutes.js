@@ -32,6 +32,15 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const properties = await Property.find();
+    res.json(properties);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // Get property by ID
 router.get("/:id", async (req, res) => {
   try {
