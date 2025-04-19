@@ -2,15 +2,8 @@ import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema(
   {
-    rentalAgreementId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "RentalAgreement",
-      required: true,
-    },
-    amount: {
-      type: Number,
-      required: true,
-    },
+    rentalAgreementId: String, // Store agreement ID as string instead of reference
+    amount: Number,
     timestamp: {
       type: Date,
       default: Date.now,
@@ -18,15 +11,9 @@ const paymentSchema = new mongoose.Schema(
     method: {
       type: String,
       enum: ["Cryptocurrency", "Fiat"],
-      required: true,
     },
-    externalPaymentId: {
-      type: String,
-    },
-    month: {
-      type: Number,
-      required: true,
-    },
+    externalPaymentId: String,
+    month: Number,
   },
   { timestamps: true }
 );

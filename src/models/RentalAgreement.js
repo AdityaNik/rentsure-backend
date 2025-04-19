@@ -2,27 +2,12 @@ import mongoose from "mongoose";
 
 const rentalAgreementSchema = new mongoose.Schema(
   {
-    propertyId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Property",
-      required: true,
-    },
-    tenantAddress: {
-      type: String,
-      required: true,
-    },
-    agreementStartDate: {
-      type: Date,
-      required: true,
-    },
-    agreementEndDate: {
-      type: Date,
-      required: true,
-    },
-    agreementDocHash: {
-      type: String,
-      required: true,
-    },
+    propertyId: String, // Store property ID as string instead of reference
+    landlordId: String, // Reference to landlord
+    tenantAddress: String,
+    agreementStartDate: Date,
+    agreementEndDate: Date,
+    agreementDocHash: String,
     status: {
       type: String,
       enum: ["Pending", "Active", "Terminated", "Disputed"],
@@ -38,11 +23,7 @@ const rentalAgreementSchema = new mongoose.Schema(
       enum: ["NotPerformed", "Passed", "Failed"],
       default: "NotPerformed",
     },
-    evidenceHashes: [
-      {
-        type: String,
-      },
-    ],
+    evidenceHashes: [String],
     securityDepositPaid: {
       type: Boolean,
       default: false,
@@ -55,9 +36,7 @@ const rentalAgreementSchema = new mongoose.Schema(
       type: String,
       enum: ["Cryptocurrency", "Fiat"],
     },
-    lastPaymentDate: {
-      type: Date,
-    },
+    lastPaymentDate: Date,
   },
   { timestamps: true }
 );
