@@ -4,23 +4,30 @@ import Property from "../models/Property.js";
 const router = express.Router();
 
 // List a new property
+
 router.post("/", async (req, res) => {
   try {
-    const property = new Property(req.body);
+    // Get property data directly from request body
+    const propertyData = req.body;
+    
+    // Initialize empty property images array
+    propertyData.propertyImages = [];
+    
+    // Create new property
+    const property = new Property(propertyData);
     await property.save();
-    res.status(201).json(property);
+    
+    res.status(201).json({
+      success: true,
+      message: "Property created successfully",
+      property,
+    });
   } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
-// Get all properties
-router.get("/", async (req, res) => {
-  try {
-    const properties = await Property.find();
-    res.json(properties);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(400).json({
+      success: false,
+      message: "Error creating property",
+      error: error.message,
+    });
   }
 });
 

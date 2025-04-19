@@ -19,7 +19,7 @@ const landlordSchema = new mongoose.Schema(
         default: "google.com",
       },
     },
-    properties: [String], // Array of property IDs
+    properties: [String], // Array of property IDs\
     active: {
       type: Boolean,
       default: true,
