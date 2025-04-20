@@ -2,6 +2,32 @@ import mongoose from "mongoose";
 
 const propertySchema = new mongoose.Schema(
   {
+    propertyHash: String,
+    landlordId: String,
+    propertysummary: String,
+    landlord: String,
+    rentAmountInCrypto: Number,
+    rentAmountInFiat: Number,
+    securityDeposit: Number,
+    Description: String,
+
+    location: String,
+    status: {
+      type: String,
+      enum: ["rented", "for-sale", "sold"],
+      default: "rented",
+    },
+    Amenities: {
+      type: [String],
+      default: [],
+    },
+    images: {
+      type: [String],
+      default: [],
+    },
+  
+    rentDueDay: Number,
+    leaseDuration: Number,
     propertyHash: { type: String, required: false },
     landlordId: { type: String, required: false },
     landlord: { type: String, required: false },
@@ -48,10 +74,10 @@ const propertySchema = new mongoose.Schema(
       required: false
     },
 
-    propertyImages: { type: [String], required: false }
+    propertyImages: { type: [String], required: false },
+    interestedUsers: { type: [String], required: false },
   },
   { timestamps: true }
 );
-
 
 export default mongoose.model("Property", propertySchema);
