@@ -7,6 +7,7 @@ const router = express.Router();
 // Register a new tenant
 router.post("/", async (req, res) => {
   try {
+    console.log("Registering tenant:", req.body);
     // Check if tenant already exists with this UID
     const existingTenant = await Tenant.findOne({ uid: req.body.uid });
     if (existingTenant) {
@@ -14,7 +15,8 @@ router.post("/", async (req, res) => {
     }
 
     const tenant = new Tenant(req.body);
-    await tenant.save();
+    await tenant.save();  
+    console.log("Tenant created:", tenant);
     res.status(201).json(tenant);
   } catch (error) {
     res.status(400).json({ message: error.message });

@@ -6,9 +6,8 @@ const tenantSchema = new mongoose.Schema(
     walletAddress: { type: String, required: false },
     name: { type: String, required: false },
     email: { type: String, required: false },
-    phone: { type: String, required: false },
     photoURL: { type: String, required: false },
-    emailVerified: { type: Boolean, required: false },
+    emailVerified: { type: Boolean, required: false, default: true },
     authProvider: {
       type: String,
       default: "google",
